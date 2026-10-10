@@ -62,12 +62,12 @@ listaOperacoes();
 console.log('')
 
 let iniciar = () => {
-    let leitor = readline.createInterface({
+    let jarvis = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
 
-    leitor.question(`Quais são seus números e a operação desejada?\n`, (valor) => {
+    jarvis.question(`Quais são seus números e a operação desejada?\n`, (valor) => {
         let instrucoes = valor.split(' ')
         console.log(`Estas foram suas instruções: ${instrucoes}\n`)
 
@@ -77,7 +77,7 @@ let iniciar = () => {
         if (entrada === undefined || !isNomeOperacao(entrada)) {
             console.log('Operação inválida');
             listaOperacoes();
-            leitor.close();
+            jarvis.close();
             return;
         }
         
@@ -86,7 +86,7 @@ let iniciar = () => {
         for (const instrucao of instrucoes.slice(0, -1)) {
             if (!Number.isFinite(Number(instrucao))) {
                 console.log(`${instrucao} não é um número!`)
-                leitor.close();
+                jarvis.close();
                 return;
             }
         }
@@ -96,7 +96,7 @@ let iniciar = () => {
 
         if (instrucoes.length === 3 && operacao !== 'bhaskara') {
             operacoes[operacao](num1, num2)
-            leitor.close();
+            jarvis.close();
             return
         } else if (instrucoes.length === 4 && operacao === 'bhaskara') {
             try {
@@ -104,17 +104,17 @@ let iniciar = () => {
             } catch (erro) {
                 if (erro instanceof Error) {
                     console.log(erro.message);
-                    leitor.close();
+                    jarvis.close();
                     return
                 }
             }
             
-            leitor.close();
+            jarvis.close();
             return
         } else {
             console.log('Número de instruções inválidas!')
             listaOperacoes();
-            leitor.close();
+            jarvis.close();
             return
         }
     })
